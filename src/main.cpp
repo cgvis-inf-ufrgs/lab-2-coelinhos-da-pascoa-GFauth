@@ -400,17 +400,31 @@ int main(int argc, char* argv[])
         #define BUNNY  1
         #define PLANE  2
 
+        float i;
+        float pi = 3.14159256;
+        float h = 1.0f;
+        float yvar;
+        float xvar;
+
+        for (int i = 0; i < 16; i++) {
+            
+        }
+
         // Desenhamos o modelo da esfera
         model = Matrix_Translate(-1.0f,0.0f,0.0f);
         glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
         glUniform1i(g_object_id_uniform, SPHERE);
         DrawVirtualObject("the_sphere");
 
-        // Desenhamos o modelo do coelho
-        model = Matrix_Translate(1.0f,0.0f,0.0f);
-        glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
-        glUniform1i(g_object_id_uniform, BUNNY);
-        DrawVirtualObject("the_bunny");
+        for (i=0;i<16;i++){
+            // Desenhamos o modelo do coelho
+            xvar = i * 1.0f;
+            yvar = h * sin(xvar * glfwGetTime() * 5);
+            model = Matrix_Rotate_Y(2.0f * M_PI/16 * i) * Matrix_Translate(2.0f,yvar,0.0f) * Matrix_Scale(0.3f,0.3f,0.3f);
+            glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
+            glUniform1i(g_object_id_uniform, BUNNY);
+            DrawVirtualObject("the_bunny");
+        }
 
         // Desenhamos o plano do chão
         model = Matrix_Translate(0.0f,-1.0f,0.0f) * Matrix_Scale(4.0f,1.0f,4.0f);
