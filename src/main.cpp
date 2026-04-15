@@ -15,6 +15,7 @@
 //  vira
 //    #include <cstdio> // Em C++
 //
+#define _USE_MATH_DEFINES /*EU VOU OBLITERAR O WINDOWS, ESSA ÚNICA LINHA DE CÓDIGO FUDEU MEU PROJETO COMPLETAMENTE E ME FEZ TER QUE PARAR O LAB POR MIAS DE 100 HORAS MORRA BILL GATES PUREFAÇA NO INFERNO SEU VERME INSOLENTE*/
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -244,7 +245,7 @@ int main(int argc, char* argv[])
     // Criamos uma janela do sistema operacional, com 800 colunas e 600 linhas
     // de pixels, e com título "INF01047 ...".
     GLFWwindow* window;
-    window = glfwCreateWindow(800, 600, "INF01047 - Seu Cartao - Seu Nome", NULL, NULL);
+    window = glfwCreateWindow(800, 600, "INF01047 - 00579340 - Gabriel Iza Fauth", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -400,32 +401,74 @@ int main(int argc, char* argv[])
         #define BUNNY  1
         #define PLANE  2
 
-        float i;
-        float pi = 3.14159256;
         float h = 1.0f;
         float yvar;
         float xvar;
 
-        for (int i = 0; i < 16; i++) {
-            
-        }
+        
+
+for (int i=0;i<16;i++){
+    // Desenhamos o modelo dos coelhos
+    xvar = 2.0f;
+    //yvar = h * sin(xvar * glfwGetTime() * 5);
+    // nessa ordem
+    // model = Matrix_Rotate_Y * Matrix_Translate * Matrix_Scale;
+
+    if(i % 4 == (int)0)
+    {
+        model = Matrix_Rotate_Y(xvar * M_PI/16 * i) * Matrix_Translate(xvar, 0.4f + sin((glfwGetTime()/xvar ) * 4.0f + xvar * M_PI / 16.0f * i * 4.0f ) , 0.0f) * Matrix_Scale (0.3f , 0.3f, 0.3f) * Matrix_Rotate_X( -glfwGetTime() * xvar - 1.6f) * Matrix_Rotate_Y((xvar + 1.2f) * M_PI / xvar);
+        
+        //model = Matrix_Rotate_Y(glfwGetTime() + h);
+        model = Matrix_Rotate_Y (glfwGetTime() / xvar) * model;
+
+        //meu deus
+        glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
+        glUniform1i(g_object_id_uniform, BUNNY);
+        DrawVirtualObject("the_bunny");
+
+    }
+    else
+    {
+        model = Matrix_Rotate_Y( xvar * M_PI/ 16.0f * i) * Matrix_Translate( xvar , 0.4f + sin((glfwGetTime() / xvar)* 4.0f + xvar * M_PI / 16.0f * i* 4.0f ) , 0.0f) * Matrix_Scale( 0.3f, 0.3f, 0.3f ) * Matrix_Rotate_Y(xvar + 1.2f * M_PI / xvar);
+        model = Matrix_Rotate_Y( glfwGetTime() / xvar) * model;
+
+        glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
+        glUniform1i(g_object_id_uniform, BUNNY);
+        DrawVirtualObject("the_bunny");
+    }
 
         // Desenhamos o modelo da esfera
-        model = Matrix_Translate(-1.0f,0.0f,0.0f);
-        glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
-        glUniform1i(g_object_id_uniform, SPHERE);
-        DrawVirtualObject("the_sphere");
+        // verificar como fazer duas esferas pra cada
+    model = Matrix_Rotate_Y(2.0f * M_PI / 16.0f * i) *
+            Matrix_Translate(2.0f,
+                            0.4f + sin((glfwGetTime() / 2.0f) * 4.0f + 2.0f * M_PI / 16.0f * i * 4.0f),
+                            0.0f) *
+            Matrix_Rotate_Z(-2 * glfwGetTime()) *
+            Matrix_Translate(0.4f, 0, 0) *
+            Matrix_Rotate_Z(2 * glfwGetTime()) *
+            Matrix_Scale(0.1f, 0.15f, 0.1f);
 
-        for (i=0;i<16;i++){
-            // Desenhamos o modelo do coelho
-            xvar = i * 1.0f;
-            yvar = h * sin(xvar * glfwGetTime() * 5);
-            model = Matrix_Rotate_Y(2.0f * M_PI/16 * i) * Matrix_Translate(2.0f,yvar,0.0f) * Matrix_Scale(0.3f,0.3f,0.3f);
-            glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));
-            glUniform1i(g_object_id_uniform, BUNNY);
-            DrawVirtualObject("the_bunny");
-        }
+    model = Matrix_Rotate_Y(glfwGetTime() / 2.0f) * model;
+//folk
+    glUniformMatrix4fv(g_model_uniform, 1, GL_FALSE, glm::value_ptr(model));
+    glUniform1i(g_object_id_uniform, SPHERE);
+    DrawVirtualObject("the_sphere");
 
+    model = Matrix_Rotate_Y(2.0f * M_PI / 16.0f * i) *
+            Matrix_Translate(2.0f,
+                            0.4f + sin((glfwGetTime() / 2.0f) * 4.0f + 2.0f * M_PI / 16.0f * i * 4.0f),
+                            0.0f) *
+            Matrix_Rotate_Z(-2 * glfwGetTime()) *
+            Matrix_Translate(0.4f * -1.0f, 0, 0) *
+            Matrix_Rotate_Z(2 * glfwGetTime()) *
+            Matrix_Scale(0.1f, 0.15f, 0.1f);
+
+    model = Matrix_Rotate_Y(glfwGetTime() / 2.0f) * model;
+
+    glUniformMatrix4fv(g_model_uniform, 1, GL_FALSE, glm::value_ptr(model));
+    glUniform1i(g_object_id_uniform, SPHERE);
+    DrawVirtualObject("the_sphere");
+}
         // Desenhamos o plano do chão
         model = Matrix_Translate(0.0f,-1.0f,0.0f) * Matrix_Scale(4.0f,1.0f,4.0f);
         glUniformMatrix4fv(g_model_uniform, 1 , GL_FALSE , glm::value_ptr(model));

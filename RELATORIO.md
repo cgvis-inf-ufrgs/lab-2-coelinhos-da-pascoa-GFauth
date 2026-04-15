@@ -6,8 +6,8 @@
 
 ## Dados do aluno
 
-- **Cartão UFRGS**: <mark>`<preencher>`</mark>
-- **Nome**: <mark>`<preencher>`</mark>
+- **Cartão UFRGS**: <mark>`00579340`</mark>
+- **Nome**: <mark>`Gabriel Iza Fauth`</mark>
 
 ## Passos que eu segui para resolver o problema especificado (em formato de *"prompt"*)
 
@@ -30,20 +30,20 @@
 > - Novamente, lembre-se que você *não pode utilizar ferramentas
 >   de IA para escrever este relatório*
 
-<mark>`<preencher>`</mark>
+<mark>`Crie um for onde cada i será um coelho. Rotacione cada coelho para que ele olhem para o centro. Translade-os em relação ao eixo X para a posição correta e no eixo Y em relação ao tempo e a função seno para que eles fiquem subindo e descndo. Adicione uma rotação no eixo X em relação ao tempo e a posição 'i' e a cada 4 coelhos adicione mais uma rotação no eixo Y em relação ao tempo para que eles girem no sentido anti-horário. Adicione duas esferas para cada i, deixe o Y de cada esfera maior que o X para obter o formato oval. Translade os ovos para uma distancia X e -X do coelho para ficarem opostos um do outro. Rotacione a esfera no eixo X na mesma velocidade que o coelho e no eixo Z para ele girar ao redor do coelho. Suba todos os objetos um pouco para que não atravessem o chão.`</mark>
 
 ## Principais dificuldades encontradas durante o desenvolvimento (formato livre)
 
-<mark>`<preencher>`</mark>
+<mark>`Fazer o programa compilar no Windows (demorei 10h para descobrir o porquê)`</mark>
 
 ## Você acha que conseguiu resolver o problema de forma adequada?
 
-<mark>`<preencher>`</mark>
+<mark>`Sim`</mark>
 
 ## Se você quiser compartilhar mais alguma coisa, coloque aqui:
 
-<mark>`<preencher>`</mark>
+<mark>`Tudo ótimo`</mark>
 
 ## Se você possui alguma sugestão para o professor sobre esta atividade, coloque aqui:
 
-<mark>`<preencher>`</mark>
+<mark>`Nenhuma`</mark>
